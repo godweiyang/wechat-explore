@@ -12,11 +12,15 @@ public class IMEI {
             ObjectInputStream in1 = new ObjectInputStream(new FileInputStream(args[1]));
             Object DJ = in1.readObject();
             HashMap hashWithOutFormat1 = (HashMap) DJ;
-            String s = String.valueOf(hashWithOutFormat1.get(Integer.valueOf(258))); // 取手机的IMEI
-            System.out.println("The IMEI is : " + s);
+            String S = String.valueOf(hashWithOutFormat1.get(Integer.valueOf(258))); // 取手机的IMEI
+            if (S == "null" ){
+                S = String.valueOf("1234567890ABCDEF");
+                // 当IMEI为空的时候使用 1234567890ABCDEF 作为IMEI 参与运算
+            }
+            System.out.println("The IMEI is : " + S);
             String uin = String.valueOf(hashWithOutFormat.get(Integer.valueOf(1)));
             System.out.println("The uin is : " + uin);
-            s = s + uin; // 合并到一个字符串
+            String s = S + uin; // 合并到一个字符串
             s = encode(s); // hash
             System.out.println("The Key is : " + s.substring(0, 7));
             in.close();
